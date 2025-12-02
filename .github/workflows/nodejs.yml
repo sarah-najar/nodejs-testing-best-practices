@@ -32,3 +32,41 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run test:nestjs
+    test:
+      needs: build
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version-file: '.nvmrc'
+
+        - name: Install dependencies
+          run: npm ci
+
+        - name: Run tests
+          run: npm run test
+
+
+    test-nestjs:
+      needs: build
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version-file: '.nvmrc'
+
+        - name: Install dependencies
+          run: npm ci
+
+        - name: Run nestjs tests
+          run: npm run test:nestjs
+    
+
